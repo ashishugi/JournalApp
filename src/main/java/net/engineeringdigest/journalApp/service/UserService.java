@@ -5,8 +5,6 @@ import net.engineeringdigest.journalApp.entity.User;
 import net.engineeringdigest.journalApp.enums.UserRole;
 import net.engineeringdigest.journalApp.repository.UserRepository;
 import org.bson.types.ObjectId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,8 +22,6 @@ public class UserService {
     private UserRepository userRepository;
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    private static final Logger LOGGER = LoggerFactory.getLogger(JournalEntryService.class);
-
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -42,7 +38,7 @@ public class UserService {
             user.setRoles(Arrays.asList(UserRole.USER));
             return userRepository.save(user);
         } catch (Exception ex) {
-            LOGGER.error("Issue occurred while savings journal entry");
+            log.error("Issue occurred while savings journal entry ", ex);
         }
         return null;
     }
