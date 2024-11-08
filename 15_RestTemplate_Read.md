@@ -8,3 +8,9 @@
    ```
 3. Deserialization: The process of converting JSON object to corresponding POJO (plain old java object) is called deserialization.
 4. Serialization: The process of converting POJO to Json is referred as serialization.
+
+
+<h1>Post Construct</h1>
+
+1. This is used over a method - just after the bean is created, that particular method will be invoked.
+2. 

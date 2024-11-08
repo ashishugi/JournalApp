@@ -1,5 +1,6 @@
 package net.engineeringdigest.journalApp.controller;
 
+import net.engineeringdigest.journalApp.config.AppCache;
 import net.engineeringdigest.journalApp.entity.User;
 import net.engineeringdigest.journalApp.service.JournalEntryService;
 import net.engineeringdigest.journalApp.service.UserService;
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -20,6 +20,8 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private JournalEntryService journalEntryService;
+    @Autowired
+    private AppCache appCache;
 
     @GetMapping("/users")
     public ResponseEntity<?> getAllUser() {
@@ -37,6 +39,11 @@ public class AdminController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    }
+
+    @GetMapping("/clear-app-cache")
+    public void clearAppCache() {
+        appCache.init();
     }
 
 }

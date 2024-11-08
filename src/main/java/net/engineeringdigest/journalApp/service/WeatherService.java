@@ -1,6 +1,9 @@
 package net.engineeringdigest.journalApp.service;
 
 import net.engineeringdigest.journalApp.api.response.WeatherResponse;
+import net.engineeringdigest.journalApp.config.AppCache;
+import net.engineeringdigest.journalApp.entity.ConfigJournalApp;
+import net.engineeringdigest.journalApp.enums.API_ENDPOINT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -15,10 +18,12 @@ public class WeatherService {
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private AppCache appCache;
 
-    //https://weatherstack.com/documentation
+    // https://weatherstack.com/documentation
     public WeatherResponse getWeather(String city) {
-        String finalApiEndPoint = "https://api.weatherstack.com/current?access_key=" + API_KEY + "&query=" + city;
+        String finalApiEndPoint = appCache.CACHE.get(API_ENDPOINT.WEATHER_API.toString()) + API_KEY + "&query=" + city;
 
         // here received output will be deserialize to WeatherResponse.class.
         ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalApiEndPoint, HttpMethod.GET, null, WeatherResponse.class);
