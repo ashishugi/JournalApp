@@ -1,8 +1,13 @@
-<h1>MongoTemplate</h1>
+package net.engineeringdigest.journalApp.repository;
 
-1. Spring provides MongoTemplate, It is used to interact with the database - Mongo. Spring will autoconfigure it, we do not need to take care of it.
-2. We can use Criteria to perform various type of queries based on criteria.
-```
+import net.engineeringdigest.journalApp.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+
+import java.util.List;
+
 public class UserRepositoryImpl {
 
     @Autowired
@@ -24,5 +29,3 @@ public class UserRepositoryImpl {
         return mongoTemplate.find(query, User.class);
     }
 }
-
-```

@@ -22,3 +22,4 @@
       This generated code is added to the compiled class files(.class files)
    2. Java compiler compiles your classes, including the generated code. This means that the generated methods become part of your compiles class files.
       When you run application, the generated methods are available for use, just like any other methods in you classes.
+5. Using ```@Builder``` overrides the default constructor of the class, hence there might be possibility that we might need to add ```@NoArgsConstructor``` and ```@AllArgsConstructor```
