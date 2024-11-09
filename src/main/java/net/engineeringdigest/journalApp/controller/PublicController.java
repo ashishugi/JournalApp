@@ -1,6 +1,7 @@
 package net.engineeringdigest.journalApp.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import net.engineeringdigest.journalApp.dto.UserDTO;
 import net.engineeringdigest.journalApp.entity.JournalEntry;
 import net.engineeringdigest.journalApp.entity.User;
 import net.engineeringdigest.journalApp.service.CustomUserDetailsService;
@@ -43,7 +44,13 @@ public class PublicController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<User> signUp(@RequestBody User user) {
+    public ResponseEntity<User> signUp(@RequestBody UserDTO userDTO) {
+        User user = new User();
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
+        user.setEmail(userDTO.getEmail());
+        user.setSentimentAnalysis(userDTO.isSentimentAnalysis());
+
         User savedUser = userService.saveNewUser(user);
         if (savedUser != null) {
             return new ResponseEntity<>(user, HttpStatus.CREATED);
