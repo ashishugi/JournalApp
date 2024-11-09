@@ -21,7 +21,7 @@ public class UserScheduler {
 
     // Use this to generate cron regex- http://www.cronmaker.com/;jsessionid=node04ei67t00gzl84dmccnlqueba811730.node0?0
     // OR use: https://www.freeformatter.com/cron-expression-generator-quartz.html
-    @Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 0 0 ? * *")
     public void fetchUserAndSentSentimentAnalysis() {
         List<User> userList = userRepositoryImpl.getUserForSentimentalAnalysis();
 
